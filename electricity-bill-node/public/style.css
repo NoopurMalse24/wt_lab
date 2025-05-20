@@ -1,0 +1,15 @@
+body {
+    background-color: #f8f9fa;
+  }
+  
+  form {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+  

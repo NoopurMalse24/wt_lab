@@ -1,0 +1,56 @@
+<!-- 9. Create a web page for calculator using HTML, JavaScript and CSS. It should have basic functions like +, -, *, / and %. Use appropriate tags like <table>, <div>, <header>, <section>, <footer> -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Simple Calculator</title>
+      <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+    
+      <header>
+        <h1>Web Calculator</h1>
+      </header>
+    
+      <section class="calculator">
+        <div class="display">
+          <input type="text" id="result" readonly />
+        </div>
+    
+        <table>
+          <tr>
+            <td><button onclick="clearDisplay()">C</button></td>
+            <td><button onclick="append('%')">%</button></td>
+            <td><button onclick="append('/')">/</button></td>
+            <td><button onclick="append('*')">*</button></td>
+          </tr>
+          <tr>
+            <td><button onclick="append('7')">7</button></td>
+            <td><button onclick="append('8')">8</button></td>
+            <td><button onclick="append('9')">9</button></td>
+            <td><button onclick="append('-')">-</button></td>
+          </tr>
+          <tr>
+            <td><button onclick="append('4')">4</button></td>
+            <td><button onclick="append('5')">5</button></td>
+            <td><button onclick="append('6')">6</button></td>
+            <td><button onclick="append('+')">+</button></td>
+          </tr>
+          <tr>
+            <td><button onclick="append('1')">1</button></td>
+            <td><button onclick="append('2')">2</button></td>
+            <td><button onclick="append('3')">3</button></td>
+            <td rowspan="2"><button onclick="calculate()" class="equal">=</button></td>
+          </tr>
+          <tr>
+            <td colspan="2"><button onclick="append('0')">0</button></td>
+            <td><button onclick="append('.')">.</button></td>
+          </tr>
+        </table>
+      </section>
+    
+      <script src="script.js"></script>
+    </body>
+    </html>
+    

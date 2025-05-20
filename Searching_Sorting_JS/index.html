@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<head>
+  <title>BST Search & Sort Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 30px; }
+    .output { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center">Binary Search Tree - Search & Sort</h2>
+
+    <div class="mb-3">
+      <label for="numberInput" class="form-label">Enter Integer:</label>
+      <input type="number" id="numberInput" class="form-control" placeholder="e.g., 15">
+    </div>
+
+    <button class="btn btn-primary" onclick="insertNode()">Insert</button>
+    <button class="btn btn-success" onclick="sortTree()">Sort (Inorder Traversal)</button>
+    <button class="btn btn-info" onclick="searchValue()">Search</button>
+
+    <div class="output">
+      <h5>Sorted Elements:</h5>
+      <p id="sortOutput">None</p>
+
+      <h5>Search Result:</h5>
+      <p id="searchOutput">None</p>
+    </div>
+  </div>
+
+  <script>
+    // BST Node
+    class Node {
+      constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+      }
+    }
+
+    // BST Root
+    let root = null;
+
+    // Insert node in BST
+    function insert(data) {
+      const newNode = new Node(data);
+      if (!root) {
+        root = newNode;
+        return;
+      }
+
+      let current = root;
+      while (true) {
+        if (data < current.data) {
+          if (!current.left) {
+            current.left = newNode;
+            break;
+          }
+          current = current.left;
+        } else {
+          if (!current.right) {
+            current.right = newNode;
+            break;
+          }
+          current = current.right;
+        }
+      }
+    }
+
+    // Inorder traversal (left → root → right) = Sorted Output
+    function inorder(node, result = []) {
+      if (node) {
+        inorder(node.left, result);
+        result.push(node.data);
+        inorder(node.right, result);
+      }
+      return result;
+    }
+
+    // Search a value in BST
+    function search(node, target) {
+      if (!node) return false;
+      if (node.data === target) return true;
+      if (target < node.data) return search(node.left, target);
+      else return search(node.right, target);
+    }
+
+    // Handle Insert
+    function insertNode() {
+      const val = parseInt(document.getElementById("numberInput").value);
+      if (!isNaN(val)) {
+        insert(val);
+        document.getElementById("numberInput").value = '';
+        document.getElementById("sortOutput").textContent = "Inserted!";
+        document.getElementById("searchOutput").textContent = "None";
+      } else {
+        alert("Please enter a valid integer.");
+      }
+    }
+
+    // Handle Sort
+    function sortTree() {
+      const result = inorder(root);
+      document.getElementById("sortOutput").textContent = result.length ? result.join(", ") : "Tree is empty.";
+    }
+
+    // Handle Search
+    function searchValue() {
+      const val = parseInt(document.getElementById("numberInput").value);
+      if (!isNaN(val)) {
+        const found = search(root, val);
+        document.getElementById("searchOutput").textContent = found ? "Value Found!" : "Value Not Found.";
+      } else {
+        alert("Enter a number to search.");
+      }
+    }
+  </script>
+</body>
+</html>

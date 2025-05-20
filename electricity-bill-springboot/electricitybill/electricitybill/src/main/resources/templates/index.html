@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Electricity Bill Calculator</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Electricity Bill Calculator</h2>
+
+    <form id="billForm">
+        <div class="mb-3">
+            <label for="units" class="form-label">Enter units consumed:</label>
+            <input type="number" class="form-control" id="units" name="units" min="0" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </form>
+
+    <div id="result" class="mt-4 alert alert-info" style="display:none;"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#billForm').submit(function (e) {
+            e.preventDefault();
+
+            let units = $('#units').val();
+
+            $.ajax({
+                url: '/calculate',
+                type: 'POST',
+                data: { units: units },
+                success: function (response) {
+                    $('#result').text(response).show();
+                },
+                error: function () {
+                    $('#result').text('Error calculating bill.').show();
+                }
+            });
+        });
+    });
+</script>
+
+<!-- Bootstrap JS Bundle CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

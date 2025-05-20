@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tree BFS & DFS Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 30px; }
+    .output { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center">Binary Tree - BFS & DFS Demo</h2>
+
+    <div class="mb-3">
+      <label for="numberInput" class="form-label">Enter Integer:</label>
+      <input type="number" id="numberInput" class="form-control" placeholder="e.g., 10">
+    </div>
+
+    <button class="btn btn-primary" onclick="insertNode()">Insert</button>
+    <button class="btn btn-success" onclick="bfsTraversal()">Breadth-First Search (BFS)</button>
+    <button class="btn btn-info" onclick="dfsTraversal()">Depth-First Search (DFS - Preorder)</button>
+
+    <div class="output">
+      <h5>BFS Output:</h5>
+      <p id="bfsOutput">None</p>
+
+      <h5>DFS Output:</h5>
+      <p id="dfsOutput">None</p>
+    </div>
+  </div>
+
+  <script>
+    // Node class for binary tree
+    class Node {
+      constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+      }
+    }
+
+    // Root of tree
+    let root = null;
+
+    // Insert using simple BST logic
+    function insert(data) {
+      const newNode = new Node(data);
+      if (!root) {
+        root = newNode;
+        return;
+      }
+
+      let queue = [root];
+      while (queue.length) {
+        let current = queue.shift();
+        if (!current.left) {
+          current.left = newNode;
+          return;
+        } else {
+          queue.push(current.left);
+        }
+
+        if (!current.right) {
+          current.right = newNode;
+          return;
+        } else {
+          queue.push(current.right);
+        }
+      }
+    }
+
+    // Insert Node handler
+    function insertNode() {
+      const val = parseInt(document.getElementById("numberInput").value);
+      if (!isNaN(val)) {
+        insert(val);
+        document.getElementById("numberInput").value = '';
+        document.getElementById("bfsOutput").textContent = "Inserted!";
+        document.getElementById("dfsOutput").textContent = "None";
+      } else {
+        alert("Please enter a valid integer.");
+      }
+    }
+
+    // Breadth First Search
+    function bfsTraversal() {
+      if (!root) {
+        document.getElementById("bfsOutput").textContent = "Tree is empty.";
+        return;
+      }
+
+      let result = [];
+      let queue = [root];
+
+      while (queue.length) {
+        let node = queue.shift();
+        result.push(node.data);
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+
+      document.getElementById("bfsOutput").textContent = result.join(", ");
+    }
+
+    // Depth First Search (Preorder Traversal)
+    function dfs(node, result = []) {
+      if (node) {
+        result.push(node.data);       // Visit root
+        dfs(node.left, result);       // Visit left
+        dfs(node.right, result);      // Visit right
+      }
+      return result;
+    }
+
+    // DFS handler
+    function dfsTraversal() {
+      if (!root) {
+        document.getElementById("dfsOutput").textContent = "Tree is empty.";
+        return;
+      }
+
+      const result = dfs(root);
+      document.getElementById("dfsOutput").textContent = result.join(", ");
+    }
+  </script>
+</body>
+</html>

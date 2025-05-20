@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>Color Changing Section</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header, footer {
+      background-color: #f1f1f1;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      border: 1px solid #337ab7;
+    }
+
+    .left, .right {
+      flex: 1;
+      border: 1px solid #337ab7;
+    }
+
+    .center {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #337ab7;
+      padding: 20px;
+    }
+
+    .color-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .color-buttons button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin: 0 10px;
+      border: 2px solid black;
+      cursor: pointer;
+    }
+
+    .blue { background-color: #4682B4; }
+    .red { background-color: #CD5C5C; }
+    .orange { background-color: #FFA500; }
+
+    @media (max-width: 768px) {
+      .main {
+        flex-direction: column;
+      }
+
+      .left, .right, .center {
+        flex: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h2>Header Section</h2>
+    </header>
+
+    <div class="main">
+      <div class="left"></div>
+
+      <div class="center" id="colorSection">
+        <p style="text-align: center;">This section should change colour after<br> clicking on following buttons</p>
+        <div class="color-buttons">
+          <button class="blue" onclick="changeColor('#4682B4')"></button>
+          <button class="red" onclick="changeColor('#CD5C5C')"></button>
+          <button class="orange" onclick="changeColor('#FFA500')"></button>
+        </div>
+      </div>
+
+      <div class="right"></div>
+    </div>
+
+    <footer>
+      <p>Footer Section</p>
+    </footer>
+  </div>
+
+  <script>
+    function changeColor(color) {
+      document.getElementById("colorSection").style.backgroundColor = color;
+    }
+  </script>
+</body>
+</html>

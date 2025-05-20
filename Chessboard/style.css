@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #f8f9fa;
+  }
+  
+  header {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+  }
+  
+  footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .chessboard-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .chessboard table {
+    border-collapse: collapse;
+    width: 90vmin;
+    height: 90vmin;
+    table-layout: fixed;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+  
+  .chessboard td {
+    border: 1px solid #333;
+  }
+  
+  /* Alternate coloring */
+  .chessboard tr:nth-child(even) td:nth-child(odd),
+  .chessboard tr:nth-child(odd) td:nth-child(even) {
+    background-color: #769656; /* dark */
+  }
+  
+  .chessboard tr:nth-child(even) td:nth-child(even),
+  .chessboard tr:nth-child(odd) td:nth-child(odd) {
+    background-color: #eeeed2; /* light */
+  }
+  
+  /* Responsive adjustment */
+  @media (max-width: 600px) {
+    .chessboard table {
+      width: 95vmin;
+      height: 95vmin;
+    }
+  }
+  
